@@ -246,6 +246,11 @@
       backdrop-filter:blur(10px);
       position:relative;
       overflow:hidden;
+      animation:gate-breathe 6s ease-in-out infinite;
+    }
+    @keyframes gate-breathe{
+      0%,100%{transform:translateY(0);box-shadow:inset 0 0 0 1px rgba(255,255,255,.03),0 0 0 10px rgba(10,15,28,.14),var(--shadow)}
+      50%{transform:translateY(-3px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.04),0 0 0 10px rgba(10,15,28,.18),0 30px 98px rgba(0,0,0,.42)}
     }
     .hero-gate::before{
       content:"";
@@ -263,6 +268,60 @@
       background:radial-gradient(circle at center, rgba(58,202,212,.18), transparent 70%);
       filter:blur(16px);
       pointer-events:none;
+    }
+    .hero-doorframe{
+      position:absolute;
+      inset:12px;
+      pointer-events:none;
+      z-index:0;
+    }
+    .hero-pillar{
+      position:absolute;
+      top:24px;
+      bottom:24px;
+      width:28px;
+      border-radius:18px;
+      background:
+        linear-gradient(180deg, rgba(240,220,162,.14), rgba(240,220,162,.03) 18%, rgba(18,29,55,.1) 60%, rgba(240,220,162,.1)),
+        linear-gradient(90deg, rgba(255,255,255,.05), transparent 38%, transparent 62%, rgba(255,255,255,.05));
+      border:1px solid rgba(201,167,76,.18);
+      box-shadow:
+        inset 0 0 20px rgba(201,167,76,.06),
+        0 0 22px rgba(201,167,76,.05);
+      opacity:.9;
+    }
+    .hero-pillar.left{left:18px}
+    .hero-pillar.right{right:18px}
+    .hero-lintel{
+      position:absolute;
+      top:10px;
+      left:52px;
+      right:52px;
+      height:30px;
+      border-radius:16px 16px 10px 10px;
+      background:
+        linear-gradient(180deg, rgba(240,220,162,.12), rgba(240,220,162,.02)),
+        linear-gradient(90deg, rgba(255,255,255,.05), transparent 24%, transparent 76%, rgba(255,255,255,.05));
+      border:1px solid rgba(201,167,76,.16);
+      box-shadow:inset 0 0 18px rgba(201,167,76,.04);
+    }
+    .hero-plaque{
+      position:relative;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:44px;
+      padding:0 24px;
+      margin:0 auto 18px;
+      border-radius:999px;
+      border:1px solid rgba(201,167,76,.2);
+      background:linear-gradient(180deg, rgba(24,34,60,.88), rgba(11,18,34,.82));
+      color:var(--gold-soft);
+      font-family:"Cormorant Garamond",serif;
+      font-size:1.06rem;
+      letter-spacing:.34em;
+      box-shadow:0 10px 28px rgba(0,0,0,.18), inset 0 0 20px rgba(201,167,76,.04);
+      text-transform:uppercase;
     }
     .hero-tag{
       color:var(--teal);
@@ -492,6 +551,11 @@
       padding:38px;
       box-shadow:var(--shadow);
       position:relative;overflow:hidden;
+      animation:menu-float 7s ease-in-out infinite;
+    }
+    @keyframes menu-float{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-4px)}
     }
     .pricing-ritual::before{
       content:"";
@@ -511,6 +575,24 @@
       color:rgba(240,220,162,.18);
       transform:rotate(8deg);
       pointer-events:none;
+    }
+    .pricing-beam{
+      position:absolute;
+      top:-120%;
+      left:-24%;
+      width:34%;
+      height:320%;
+      background:linear-gradient(180deg, transparent, rgba(255,255,255,.04), rgba(255,255,255,.1), transparent);
+      transform:rotate(18deg);
+      animation:beam-sweep 8.5s linear infinite;
+      pointer-events:none;
+      opacity:.65;
+    }
+    @keyframes beam-sweep{
+      0%{transform:translateX(0) rotate(18deg);opacity:0}
+      10%{opacity:.55}
+      50%{opacity:.72}
+      100%{transform:translateX(420%) rotate(18deg);opacity:0}
     }
     .pricing-ritual h3{
       font-family:"Noto Serif TC",serif;
@@ -547,8 +629,15 @@
       display:flex;justify-content:space-between;gap:18px;
       padding:18px 0;border-bottom:1px solid rgba(255,255,255,.06);
       align-items:flex-start;
+      transition:transform .24s ease, border-color .24s ease, background .24s ease;
+      position:relative;
     }
     .pricing-item:last-child{border-bottom:none}
+    .pricing-item:hover{
+      transform:translateX(6px);
+      border-color:rgba(201,167,76,.18);
+      background:linear-gradient(90deg, rgba(201,167,76,.06), transparent 60%);
+    }
     .pricing-name{
       color:var(--white);
       font-family:"Noto Serif TC",serif;
@@ -576,6 +665,7 @@
       box-shadow:var(--shadow);
       position:relative;
       overflow:hidden;
+      transition:transform .28s ease, border-color .28s ease, box-shadow .28s ease;
     }
     .pricing-card::before{
       content:"";
@@ -583,6 +673,27 @@
       inset:0;
       background:linear-gradient(145deg, rgba(201,167,76,.08), transparent 46%);
       pointer-events:none;
+    }
+    .pricing-card::after{
+      content:"";
+      position:absolute;
+      inset:auto -20% -70% auto;
+      width:180px;
+      height:180px;
+      background:radial-gradient(circle, rgba(58,202,212,.14), transparent 68%);
+      filter:blur(8px);
+      pointer-events:none;
+      opacity:.55;
+      transition:opacity .28s ease, transform .28s ease;
+    }
+    .pricing-card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(201,167,76,.24);
+      box-shadow:0 34px 90px rgba(0,0,0,.38);
+    }
+    .pricing-card:hover::after{
+      opacity:.9;
+      transform:scale(1.08);
     }
     .pricing-card small{
       display:block;color:var(--teal);letter-spacing:.28em;margin-bottom:12px;font-size:.78rem
@@ -753,6 +864,26 @@
         border-radius:26px;
       }
       .hero-gate::before{inset:12px;border-radius:20px}
+      .hero-pillar{
+        width:18px;
+        top:18px;
+        bottom:18px;
+      }
+      .hero-pillar.left{left:10px}
+      .hero-pillar.right{right:10px}
+      .hero-lintel{
+        left:32px;
+        right:32px;
+        height:20px;
+        top:8px;
+      }
+      .hero-plaque{
+        min-height:36px;
+        padding:0 16px;
+        margin-bottom:14px;
+        font-size:.86rem;
+        letter-spacing:.22em;
+      }
       .hero-tag{
         font-size:.72rem;
         letter-spacing:.32em;
@@ -825,6 +956,9 @@
         padding:24px 18px;
         border-radius:28px;
       }
+      .pricing-beam{
+        width:46%;
+      }
       .pricing-ritual-head{
         flex-direction:column;
         align-items:flex-start;
@@ -887,6 +1021,12 @@
 
     <div class="container hero-shell">
       <div class="hero-gate">
+        <div class="hero-doorframe">
+          <div class="hero-lintel"></div>
+          <div class="hero-pillar left"></div>
+          <div class="hero-pillar right"></div>
+        </div>
+        <div class="hero-plaque">玄門啟壇</div>
         <p class="hero-tag">✦ 玄 門 清 修 ・ 科 儀 濟 世 ✦</p>
         <p class="hero-mantra">Enter in stillness</p>
         <h1 class="hero-title">隨緣堂</h1>
@@ -985,6 +1125,7 @@
       </div>
       <div class="pricing-stage">
         <div class="pricing-ritual reveal">
+          <div class="pricing-beam"></div>
           <div class="pricing-ritual-head">
             <div>
               <h3>常見科儀</h3>
