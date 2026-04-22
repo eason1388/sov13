@@ -1287,62 +1287,6 @@
   </div>
 </section>
 
-<!-- ═══ BALANCE ═══ -->
-<section id="balance" class="section-pad" style="background:var(--bg-dark)">
-  <div class="container">
-    <div class="text-center">
-      <div class="ornament center">
-        <div class="ornament-line"></div>
-        <span class="ornament-sym">☯ 自我評量 ☯</span>
-        <div class="ornament-line"></div>
-      </div>
-      <h2 class="section-title">陰陽失衡自我診斷</h2>
-      <div class="glow-divider"></div>
-      <p class="section-sub">勾選近期符合的症狀，評估您目前的陰陽能量狀態，以便獲得最精準的調理建議。</p>
-    </div>
-    <div class="balance-grid">
-      <div class="balance-col yang">
-        <h4>☀️ 陽亢失調症狀</h4>
-        <div id="yangItems">
-          <div class="check-item" onclick="toggleCheck(this,'yang')"><div class="check-box"></div><span class="check-label">長期焦慮、難以放鬆</span></div>
-          <div class="check-item" onclick="toggleCheck(this,'yang')"><div class="check-box"></div><span class="check-label">失眠或睡眠品質極差</span></div>
-          <div class="check-item" onclick="toggleCheck(this,'yang')"><div class="check-box"></div><span class="check-label">容易發怒、情緒激動</span></div>
-          <div class="check-item" onclick="toggleCheck(this,'yang')"><div class="check-box"></div><span class="check-label">頭部燥熱、口乾舌燥</span></div>
-          <div class="check-item" onclick="toggleCheck(this,'yang')"><div class="check-box"></div><span class="check-label">思慮過多、停不下來</span></div>
-        </div>
-      </div>
-      <div class="balance-col yin">
-        <h4>🌙 陰盛傷陽症狀</h4>
-        <div id="yinItems">
-          <div class="check-item" onclick="toggleCheck(this,'yin')"><div class="check-box"></div><span class="check-label">手腳長期冰冷</span></div>
-          <div class="check-item" onclick="toggleCheck(this,'yin')"><div class="check-box"></div><span class="check-label">慢性疲勞、提不起勁</span></div>
-          <div class="check-item" onclick="toggleCheck(this,'yin')"><div class="check-box"></div><span class="check-label">情緒低落、意志消沉</span></div>
-          <div class="check-item" onclick="toggleCheck(this,'yin')"><div class="check-box"></div><span class="check-label">代謝緩慢、體重增加</span></div>
-          <div class="check-item" onclick="toggleCheck(this,'yin')"><div class="check-box"></div><span class="check-label">夜間多夢、容易驚醒</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="balance-result">
-      <div class="balance-bar-wrap">
-        <span class="balance-label" style="color:#e8a040">陽</span>
-        <div class="balance-bar"><div class="balance-fill fill-yang" id="yangBar" style="width:0%"></div></div>
-        <span style="font-size:var(--fs-small);color:var(--white-faint);min-width:36px" id="yangPct">0%</span>
-      </div>
-      <div class="balance-bar-wrap">
-        <span class="balance-label" style="color:var(--teal)">陰</span>
-        <div class="balance-bar"><div class="balance-fill fill-yin" id="yinBar" style="width:0%"></div></div>
-        <span style="font-size:var(--fs-small);color:var(--white-faint);min-width:36px" id="yinPct">0%</span>
-      </div>
-      <p class="balance-msg" id="balanceMsg">請勾選上方症狀以獲得評估結果</p>
-      <p class="balance-service" id="balanceService"></p>
-    </div>
-    <div class="disclaimer">
-      <p><strong>⚠️ 重要聲明：</strong>以上陰陽評量僅供心靈輔助參考，<strong>身體不適請務必優先尋求專業醫療協助</strong>。隨緣堂的玄學服務定位為能量輔助與心靈慰藉，無法取代任何醫療行為。</p>
-    </div>
-  </div>
-</section>
-
-
 <!-- ═══ PRICING ═══ -->
 <section id="pricing" class="section-pad">
   <div class="container">
@@ -1474,56 +1418,6 @@
       </div>
       <div class="pricing-foot">
         以上內容為隨緣堂玄學科儀服務之公開參考價。若為跨區服務、急件處理、特殊法事或需額外備品者，將另行說明。玄學服務以心靈支持與民俗科儀為主，身體不適仍建議優先就醫。
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<!-- ═══ 太乙金華宗旨 ═══ -->
-<section id="taiyi-home" class="section-pad">
-  <div class="container">
-    <div class="text-center">
-      <div class="ornament center">
-        <div class="ornament-line"></div>
-        <span class="ornament-sym">☉ 太乙金華宗旨 ☉</span>
-        <div class="ornament-line"></div>
-      </div>
-      <h2 class="section-title">回光守中，直提性功</h2>
-      <div class="glow-divider"></div>
-      <p class="section-sub">首頁只放簡介，完整原文與逐章整理另外獨立成 <strong style="color:var(--gold-light)">taiyi.html</strong>，方便長期閱讀與搜尋。</p>
-    </div>
-
-    <div class="taiyi-home-card reveal">
-      <div class="taiyi-home-grid">
-        <div>
-          <span class="tag">完整專欄入口</span>
-          <h3>《太乙金華宗旨》：道家性命修煉的重要典籍</h3>
-          <p>《太乙金華宗旨》核心在於<strong style="color:var(--gold-light)">天心、元神、識神、回光守中、回光調息、百日築基</strong>。它不是追逐神秘感應的書，而是一部把神光收回、讓心息相依、使元神重新作主的實修典籍。</p>
-          <p>我已經另外做成獨立完整頁 <strong style="color:var(--teal)">taiyi.html</strong>，裡面包含：完整原文、首頁風格延伸版排版、SEO、OG、canonical，以及可直接放上 GitHub Pages 的完整結構。</p>
-          <div class="taiyi-home-btns">
-            <a class="btn-primary" href="taiyi.html">閱讀完整太乙金華宗旨</a>
-    <a class="btn-outline" href="#contact">預約諮詢</a>
-          </div>
-        </div>
-        <div class="taiyi-home-points">
-          <div class="taiyi-home-point">
-            <strong>天心</strong>
-            回光工夫的核心，中樞歸位則周身之氣皆上朝。
-          </div>
-          <div class="taiyi-home-point">
-            <strong>元神與識神</strong>
-            辨明誰在主導你的生命，從外馳分別回到本來靈明。
-          </div>
-          <div class="taiyi-home-point">
-            <strong>回光守中</strong>
-            把原本外散的神光、氣機與注意力重新收回中宮。
-          </div>
-          <div class="taiyi-home-point">
-            <strong>回光調息</strong>
-            治昏沉與散亂，使心息相依，由粗入細。
-          </div>
-        </div>
       </div>
     </div>
   </div>
