@@ -114,7 +114,8 @@
     .nav-inner{
       max-width:1140px;margin:0 auto;
       display:flex;align-items:center;justify-content:space-between;
-      height:66px;
+      min-height:66px;
+      gap:24px;
     }
     .nav-logo{
       font-family:'Noto Serif TC',serif;
@@ -126,11 +127,38 @@
       color:var(--teal);font-size:.82rem;display:block;
       letter-spacing:.32em;font-weight:300;margin-top:-5px;
     }
-    .nav-links{display:flex;gap:26px;list-style:none}
+    .nav-links{
+      display:flex;
+      flex:1;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      align-items:center;
+      gap:10px 14px;
+      list-style:none;
+    }
+    .nav-links li{
+      display:flex;
+      align-items:stretch;
+      justify-content:center;
+      flex:0 0 72px;
+    }
+    .nav-links li:last-child{
+      flex:0 0 auto;
+      margin-left:6px;
+    }
     .nav-links a{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:100%;
+      min-height:44px;
       color:var(--white-dim);
-      font-size:1rem;
-      letter-spacing:.06em;transition:color .3s;
+      font-size:.94rem;
+      line-height:1.45;
+      text-align:center;
+      letter-spacing:.04em;
+      transition:color .3s,background .3s,border-color .3s;
+      word-break:keep-all;
     }
     .nav-links a:hover{color:var(--gold-light)}
     .nav-cta{
@@ -138,6 +166,8 @@
       border:1px solid var(--teal-dim);border-radius:4px;
       color:var(--teal)!important;
       font-size:.92rem!important;letter-spacing:.1em;
+      min-height:48px!important;
+      width:auto!important;
       transition:all .3s!important;
     }
     .nav-cta:hover{background:var(--teal-dim);color:var(--white)!important;box-shadow:var(--glow-teal)}
@@ -826,6 +856,8 @@
         background:rgba(4,7,15,.97);padding:22px 20px;
         gap:18px;border-bottom:1px solid var(--border);
       }
+      .nav-links li,.nav-links li:last-child{flex:0 0 auto;margin-left:0}
+      .nav-links a{min-height:auto;width:auto}
       .nav-links.open{display:flex}
       .nav-toggle{display:flex}
       .consult-wrap{grid-template-columns:1fr}
