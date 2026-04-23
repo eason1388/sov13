@@ -473,6 +473,96 @@
       opacity:.55;
       z-index:0;
     }
+    .hexagram-veil{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      padding:32px;
+      background:radial-gradient(circle at center,rgba(10,20,40,.78) 0%,rgba(2,5,12,.96) 72%);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .35s ease;
+      z-index:2;
+    }
+    .hexagram-veil-inner{
+      width:min(100%,520px);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:20px;
+    }
+    .hexagram-coins{
+      display:flex;
+      justify-content:center;
+      gap:18px;
+      perspective:1200px;
+    }
+    .hexagram-coin{
+      position:relative;
+      width:78px;
+      height:78px;
+      border-radius:50%;
+      border:1px solid rgba(255,220,140,.36);
+      background:
+        radial-gradient(circle at 32% 32%,rgba(255,245,200,.95),rgba(232,190,88,.88) 42%,rgba(120,72,10,.98) 100%);
+      box-shadow:0 0 26px rgba(255,214,120,.18),inset 0 0 18px rgba(255,255,255,.2);
+      transform-style:preserve-3d;
+    }
+    .hexagram-coin::before,
+    .hexagram-coin::after{
+      position:absolute;
+      inset:0;
+      display:grid;
+      place-items:center;
+      font-family:'Noto Serif TC',serif;
+      font-size:1.6rem;
+      color:rgba(62,32,2,.9);
+      backface-visibility:hidden;
+    }
+    .hexagram-coin::before{
+      content:'乾';
+    }
+    .hexagram-coin::after{
+      content:'坤';
+      transform:rotateY(180deg);
+    }
+    .hexagram-coin-hole{
+      position:absolute;
+      top:50%;
+      left:50%;
+      width:16px;
+      height:16px;
+      background:rgba(80,48,8,.84);
+      border-radius:4px;
+      transform:translate(-50%,-50%);
+      box-shadow:0 0 0 3px rgba(253,231,170,.22);
+      z-index:1;
+    }
+    .hexagram-veil-status{
+      color:var(--gold-light);
+      font-family:'Noto Serif TC',serif;
+      font-size:clamp(1.02rem,2.2vw,1.16rem);
+      letter-spacing:.18em;
+      text-align:center;
+    }
+    .hexagram-veil-sub{
+      color:var(--white-dim);
+      text-align:center;
+      line-height:1.9;
+      max-width:34ch;
+    }
+    .hexagram-flash{
+      position:absolute;
+      inset:-10%;
+      background:
+        radial-gradient(circle at center,rgba(255,223,133,.72) 0%,rgba(255,223,133,.18) 22%,rgba(255,223,133,0) 56%),
+        linear-gradient(180deg,rgba(255,233,177,.2),rgba(255,233,177,0));
+      opacity:0;
+      transform:scale(.88);
+      pointer-events:none;
+      z-index:3;
+    }
     .hexagram-ring,
     .hexagram-core{
       position:absolute;
@@ -674,10 +764,35 @@
     .hexagram-result.is-casting .hexagram-casting{
       opacity:1;
     }
+    .hexagram-result.is-casting .hexagram-veil{
+      opacity:1;
+    }
+    .hexagram-result.is-casting .hexagram-coins{
+      animation:coinCluster 1.25s ease-in-out infinite;
+    }
+    .hexagram-result.is-casting .hexagram-coin{
+      animation:coinFlip 1s cubic-bezier(.4,.05,.2,1) infinite;
+    }
+    .hexagram-result.is-casting .hexagram-coin.c2{animation-delay:.12s}
+    .hexagram-result.is-casting .hexagram-coin.c3{animation-delay:.24s}
+    .hexagram-result.is-blackout .hexagram-veil{
+      opacity:1;
+      background:radial-gradient(circle at center,rgba(0,0,0,.92) 0%,rgba(0,0,0,.98) 80%);
+    }
+    .hexagram-result.is-blackout .hexagram-veil-status,
+    .hexagram-result.is-blackout .hexagram-veil-sub{
+      color:rgba(255,241,206,.92);
+    }
+    .hexagram-result.is-blackout .hexagram-flash{
+      animation:goldReveal .85s ease forwards;
+    }
     .hexagram-result.is-revealing .hexagram-oracle,
     .hexagram-result.is-revealing .hexagram-plain,
     .hexagram-result.is-revealing .hexagram-reading-grid{
       animation:hexagramReveal .6s ease both;
+    }
+    .hexagram-result.is-revealing .hexagram-veil{
+      animation:veilFadeOut .8s ease forwards;
     }
     .hexagram-actions .btn-primary[disabled]{
       opacity:.72;
@@ -706,6 +821,26 @@
     @keyframes hexagramReveal{
       from{opacity:0;transform:translateY(12px)}
       to{opacity:1;transform:translateY(0)}
+    }
+    @keyframes coinFlip{
+      0%{transform:translateY(0) rotateX(0deg) rotateY(0deg)}
+      25%{transform:translateY(-18px) rotateX(180deg) rotateY(120deg)}
+      50%{transform:translateY(-30px) rotateX(360deg) rotateY(220deg)}
+      75%{transform:translateY(-10px) rotateX(540deg) rotateY(310deg)}
+      100%{transform:translateY(0) rotateX(720deg) rotateY(360deg)}
+    }
+    @keyframes coinCluster{
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.06)}
+    }
+    @keyframes goldReveal{
+      0%{opacity:0;transform:scale(.68)}
+      35%{opacity:1;transform:scale(1.02)}
+      100%{opacity:0;transform:scale(1.22)}
+    }
+    @keyframes veilFadeOut{
+      from{opacity:1}
+      to{opacity:0}
     }
     .hexagram-actions{
       display:flex;
@@ -1452,6 +1587,18 @@
           <span class="hexagram-sigil s6">☰</span>
           <span class="hexagram-sigil s7">卦</span>
           <span class="hexagram-sigil s8">炁</span>
+        </div>
+        <div class="hexagram-veil" id="hexagramVeil" aria-hidden="true">
+          <div class="hexagram-flash"></div>
+          <div class="hexagram-veil-inner">
+            <div class="hexagram-coins">
+              <div class="hexagram-coin c1"><span class="hexagram-coin-hole"></span></div>
+              <div class="hexagram-coin c2"><span class="hexagram-coin-hole"></span></div>
+              <div class="hexagram-coin c3"><span class="hexagram-coin-hole"></span></div>
+            </div>
+            <div class="hexagram-veil-status" id="hexagramVeilStatus">搖卦起勢</div>
+            <p class="hexagram-veil-sub" id="hexagramVeilSub">三枚銅錢正在翻轉，請守一念，讓氣機自己結成卦象。</p>
+          </div>
         </div>
         <div class="hexagram-content">
           <p class="hexagram-number" id="hexagramNumber">第 1 卦</p>
@@ -2332,6 +2479,7 @@ const hexagramDeck=[
 let currentHexagram=0;
 let hexagramCastingTimer=null;
 let hexagramCastingFinishTimer=null;
+let hexagramBlackoutTimer=null;
 const hexagramArchetypes=[
   {
     match:/乾|泰|大有|晉|升|益|豐/,
@@ -2426,20 +2574,31 @@ function castHexagram(skipAnimation=false){
   const resultCard=document.querySelector('.hexagram-result');
   const castButton=document.getElementById('castHexagramButton');
   const castingLabel=document.getElementById('hexagramCasting');
+  const veilStatus=document.getElementById('hexagramVeilStatus');
+  const veilSub=document.getElementById('hexagramVeilSub');
   if(skipAnimation){
     renderHexagram(currentHexagram);
     resultCard.classList.remove('is-casting');
+    resultCard.classList.remove('is-blackout');
     castButton.disabled=false;
     castingLabel.textContent='起卦中';
     return;
   }
   clearInterval(hexagramCastingTimer);
   clearTimeout(hexagramCastingFinishTimer);
+  clearTimeout(hexagramBlackoutTimer);
   resultCard.classList.remove('is-revealing');
+  resultCard.classList.remove('is-blackout');
   resultCard.classList.add('is-casting');
   castButton.disabled=true;
-  castingLabel.textContent='焚香定炁';
-  const castingPhases=['焚香定炁','符光聚盤','卦象將現'];
+  castingLabel.textContent='搖卦起勢';
+  veilStatus.textContent='搖卦起勢';
+  veilSub.textContent='三枚銅錢正在翻轉，請守一念，讓氣機自己結成卦象。';
+  const castingPhases=[
+    {label:'搖卦起勢',sub:'三枚銅錢正在翻轉，請守一念，讓氣機自己結成卦象。'},
+    {label:'炁入玄盤',sub:'卦盤正在收氣，雜念越少，顯現越真。'},
+    {label:'天機將現',sub:'黑幕落下之前，卦象正在最後凝形。'}
+  ];
   let phaseIndex=0;
   hexagramCastingTimer=setInterval(()=>{
     const previewIndex=Math.floor(Math.random()*hexagramDeck.length);
@@ -2454,18 +2613,30 @@ function castHexagram(skipAnimation=false){
     document.getElementById('hexagramHealth').textContent='健康氣機翻動中';
     document.getElementById('hexagramWealth').textContent='財運氣機翻動中';
     phaseIndex=(phaseIndex+1)%castingPhases.length;
-    castingLabel.textContent=castingPhases[phaseIndex];
+    castingLabel.textContent=castingPhases[phaseIndex].label;
+    veilStatus.textContent=castingPhases[phaseIndex].label;
+    veilSub.textContent=castingPhases[phaseIndex].sub;
   },110);
+  hexagramBlackoutTimer=setTimeout(()=>{
+    resultCard.classList.remove('is-casting');
+    resultCard.classList.add('is-blackout');
+    castingLabel.textContent='黑幕收炁';
+    veilStatus.textContent='黑幕收炁';
+    veilSub.textContent='金光將啟，卦象正在黑幕之中定形。';
+  },2050);
   hexagramCastingFinishTimer=setTimeout(()=>{
     clearInterval(hexagramCastingTimer);
     const finalIndex=Math.floor(Math.random()*hexagramDeck.length);
     renderHexagram(finalIndex);
+    resultCard.classList.remove('is-blackout');
     resultCard.classList.remove('is-casting');
     resultCard.classList.add('is-revealing');
     castButton.disabled=false;
     castingLabel.textContent='卦象已現';
+    veilStatus.textContent='卦象已現';
+    veilSub.textContent='金光揭示已完成，請依卦辭與四象解讀觀照當下。';
     setTimeout(()=>resultCard.classList.remove('is-revealing'),700);
-  },2600);
+  },3000);
 }
 function copyHexagramResult(){
   const item=hexagramDeck[currentHexagram];
