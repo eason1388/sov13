@@ -75,6 +75,18 @@ a{color:var(--teal);text-decoration:none}
 </style>
 </head>
 <body>
+<script>
+(function () {
+  var nodes = Array.prototype.slice.call(document.body.childNodes);
+  nodes.forEach(function (node) {
+    if (node.nodeType !== Node.TEXT_NODE) return;
+    var text = (node.textContent || "").trim();
+    if (text.indexOf('"@context"') !== -1 && text.indexOf('schema.org') !== -1) {
+      node.parentNode.removeChild(node);
+    }
+  });
+})();
+</script>
 <nav id="navbar">
   <div class="nav-inner">
     <div class="nav-logo">隨緣堂<span>SUÌ YUÁN TÁNG</span></div>
