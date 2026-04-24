@@ -1069,22 +1069,23 @@
       gap:22px;
     }
     #fulu{position:relative;overflow:hidden}
-    #fulu .container{position:relative;z-index:1}
+    #fulu .container{position:relative;z-index:3}
     #fulu .taoist-bg{
       position:absolute;
       inset:-6% 0 -10% 0;
       pointer-events:none;
-      z-index:0;
+      z-index:2;
       display:flex;
-      align-items:flex-end;
+      align-items:center;
       justify-content:center;
-      opacity:.42;
-      filter:drop-shadow(0 22px 60px rgba(0,0,0,.38));
+      opacity:.34;
+      mix-blend-mode:screen;
+      filter:drop-shadow(0 22px 60px rgba(0,0,0,.38)) blur(.15px);
     }
     #fulu .taoist-bg svg{
       width:min(920px, 96vw);
       height:auto;
-      transform:translateY(18px);
+      transform:translateY(0);
     }
     #fulu .taoist-float{
       transform-origin:center;
