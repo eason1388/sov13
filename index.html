@@ -2319,25 +2319,30 @@
         Email：<strong style="color:var(--white)">jackkok1888@gmail.com</strong></p>
       </div>
       <div class="form-card reveal" style="transition-delay:.15s">
-        <form id="consultForm" onsubmit="submitForm(event)">
+        <form id="consultForm" action="https://formsubmit.co/jackkok1888@gmail.com" method="POST">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+          <input type="hidden" name="_subject" value="隨緣堂｜預約初診（網站表單）" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_next" value="https://eason1388.github.io/sov13/index.html?consult=ok#consult" />
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">法名 / 姓名 *</label>
-              <input type="text" class="form-input" placeholder="您的稱呼" required />
+              <input type="text" name="name" class="form-input" placeholder="您的稱呼" required />
             </div>
             <div class="form-group">
               <label class="form-label">聯絡方式 *</label>
-              <input type="text" class="form-input" placeholder="LINE ID 或 Email" required />
+              <input type="text" name="contact" class="form-input" placeholder="LINE ID 或 Email" required />
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">農曆 / 國曆生辰</label>
-              <input type="text" class="form-input" placeholder="例：1990年5月10日 午時" />
+              <input type="text" name="birth" class="form-input" placeholder="例：1990年5月10日 午時" />
             </div>
             <div class="form-group">
               <label class="form-label">性別</label>
-              <select class="form-select">
+              <select name="gender" class="form-select">
                 <option value="">請選擇</option>
                 <option>男（陽命）</option>
                 <option>女（陰命）</option>
@@ -2346,7 +2351,7 @@
           </div>
           <div class="form-group">
             <label class="form-label">諮詢類別 *</label>
-            <select class="form-select" required>
+            <select name="category" class="form-select" required>
               <option value="">請選擇最相符的困境</option>
               <option>收驚安神（驚嚇、失眠、心神不寧）</option>
               <option>祭改化煞（流年不利、事業受阻）</option>
@@ -2359,7 +2364,7 @@
           </div>
           <div class="form-group">
             <label class="form-label">困境描述 *</label>
-            <textarea class="form-textarea" placeholder="請簡述您目前遇到的困境、持續時間，以及您希望得到的幫助……" required></textarea>
+            <textarea name="message" class="form-textarea" placeholder="請簡述您目前遇到的困境、持續時間，以及您希望得到的幫助……" required></textarea>
           </div>
           <button type="submit" class="form-submit">✦ 提交初診申請 ✦</button>
           <p class="form-disclaimer">提交即代表您同意我們以提供玄學輔助為目的使用您的資料。<br/>玄學服務為心靈慰藉，不替代專業醫療。</p>
@@ -2904,6 +2909,20 @@ function submitForm(e){
   document.getElementById('consultForm').style.display='none';
   document.getElementById('formSuccess').style.display='block';
 }
+
+(function(){
+  try{
+    var params=new URLSearchParams(window.location.search||'');
+    if(params.get('consult')!=='ok') return;
+    var form=document.getElementById('consultForm');
+    var success=document.getElementById('formSuccess');
+    if(form) form.style.display='none';
+    if(success) success.style.display='block';
+    params.delete('consult');
+    var next=window.location.pathname+(params.toString()?('?'+params.toString()):'')+window.location.hash;
+    window.history.replaceState({},'',next);
+  }catch(e){}
+})();
 </script>
 </body>
 </html>
