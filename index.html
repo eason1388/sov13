@@ -2319,12 +2319,13 @@
         Email：<strong style="color:var(--white)">jackkok1888@gmail.com</strong></p>
       </div>
       <div class="form-card reveal" style="transition-delay:.15s">
-        <form id="consultForm" action="https://formsubmit.co/jackkok1888@gmail.com" method="POST">
+        <iframe name="consult_hidden_iframe" id="consultHiddenIframe" title="hidden" style="display:none" aria-hidden="true"></iframe>
+        <form id="consultForm" action="https://formsubmit.co/jackkok1888@gmail.com" method="POST" target="consult_hidden_iframe" onsubmit="handleConsultSubmit(event)">
           <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
           <input type="hidden" name="_subject" value="隨緣堂｜預約初診（網站表單）" />
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_template" value="table" />
-          <input type="hidden" name="_next" value="https://eason1388.github.io/sov13/index.html?consult=ok#consult" />
+          <input type="hidden" name="_next" value="https://eason1388.github.io/sov13/index.html#consult" />
           <div class="form-row">
             <div class="form-group">
               <label class="form-label">法名 / 姓名 *</label>
@@ -2904,25 +2905,13 @@ function updateBalance(){
 }
 
 /* ── Form ── */
-function submitForm(e){
-  e.preventDefault();
-  document.getElementById('consultForm').style.display='none';
-  document.getElementById('formSuccess').style.display='block';
+function handleConsultSubmit(){
+  var form=document.getElementById('consultForm');
+  var success=document.getElementById('formSuccess');
+  if(form) form.style.display='none';
+  if(success) success.style.display='block';
+  return true;
 }
-
-(function(){
-  try{
-    var params=new URLSearchParams(window.location.search||'');
-    if(params.get('consult')!=='ok') return;
-    var form=document.getElementById('consultForm');
-    var success=document.getElementById('formSuccess');
-    if(form) form.style.display='none';
-    if(success) success.style.display='block';
-    params.delete('consult');
-    var next=window.location.pathname+(params.toString()?('?'+params.toString()):'')+window.location.hash;
-    window.history.replaceState({},'',next);
-  }catch(e){}
-})();
 </script>
 </body>
 </html>
